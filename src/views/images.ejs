@@ -80,6 +80,13 @@
     <header>Order Images</header>
     <div class="container">
         <a class="switch-link" href="/orders">Switch to List View</a>
+        <form method="get" action="/orders/images" style="margin-bottom:2rem; display: flex; gap: 0.5rem; align-items: center;">
+            <input type="text" name="search" placeholder="Search product, type, store..." value="<%= typeof search !== 'undefined' ? search : '' %>" style="padding:0.5em 1em; border-radius:6px; border:1px solid #00bcd4; width:60%; max-width:400px;">
+            <button type="submit" style="background:#1976d2;color:#fff;border:none;padding:0.5em 1.2em;border-radius:6px;font-weight:bold;cursor:pointer;">Search</button>
+            <% if (typeof search !== 'undefined' && search) { %>
+                <a href="/orders/images" style="background:#ff9800;color:#fff;border:none;padding:0.5em 1.2em;border-radius:6px;font-weight:bold;cursor:pointer;text-decoration:none;">Clear</a>
+            <% } %>
+        </form>
         <div class="image-grid">
             <% images.forEach(order => { %>
                 <div class="image-card">

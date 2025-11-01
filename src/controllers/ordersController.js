@@ -74,9 +74,19 @@ exports.orderDetail = (req, res) => {
 };
 
 exports.imagesView = (req, res) => {
+    const search = req.query.search ? req.query.search.trim() : '';
     getOrders((orders) => {
-        // Only include orders with images
-        const images = orders.filter(order => order.imageUrl);
-        res.render('images', { images });
+        let images = orders.filter(order => order.imageUrl);
+        if (search) {
+            const Fuse = require('fuse.js');
+            const fuse = new Fuse(images, {
+                keys: ['name', 'Item attributes', 'Item product link', 'storeName'],
+                threshold: 0.4,
+                ignoreLocation: true,
+                minMatchCharLength: 2
+            });
+            images = fuse.search(search).map(result => result.item);
+        }
+        res.render('images', { images, search });
     });
 };
