@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Images</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f7f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #00bcd4;
+            color: #fff;
+            padding: 1rem 2rem;
+            text-align: center;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+        .image-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,188,212,0.07);
+            padding: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: box-shadow 0.2s;
+        }
+        .image-card img {
+            max-width: 100%;
+            max-height: 120px;
+            border-radius: 8px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+            margin-bottom: 0.5rem;
+        }
+        .image-card .product-name {
+            font-size: 0.9rem;
+            color: #1976d2;
+            text-align: center;
+            margin-bottom: 0.3rem;
+        }
+        .switch-link {
+            display: inline-block;
+            background: #1976d2;
+            color: #fff;
+            border-radius: 6px;
+            padding: 0.4em 1em;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 1px 4px rgba(25,118,210,0.08);
+            transition: background 0.2s;
+            margin-bottom: 2rem;
+        }
+        .switch-link:hover {
+            background: #1565c0;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 0.5rem;
+            }
+            .image-grid {
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>Order Images</header>
+    <div class="container">
+        <a class="switch-link" href="/orders">Switch to List View</a>
+        <div class="image-grid">
+            <% images.forEach(order => { %>
+                <div class="image-card">
+                    <a href="/orders/<%= order.orderId %>">
+                        <img src="<%= order.imageUrl %>" alt="Order image">
+                    </a>
+                    <div class="product-name">
+                        <a href="/orders/<%= order.orderId %>" style="color:#1976d2;text-decoration:none;">
+                            <%= order.name %>
+                        </a>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</body>
+</html>

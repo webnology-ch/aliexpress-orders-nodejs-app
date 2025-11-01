@@ -114,18 +114,17 @@
 <body>
     <header>AliExpress Orders</header>
     <div class="container">
-        <form method="get" action="/orders" style="margin-bottom:2rem; display: flex; gap: 0.5rem; align-items: center;">
-            <input type="text" name="search" placeholder="Search product, type, store..." value="<%= typeof search !== 'undefined' ? search : '' %>" style="padding:0.5em 1em; border-radius:6px; border:1px solid #00bcd4; width:60%; max-width:400px;">
-            <button type="submit" style="background:#1976d2;color:#fff;border:none;padding:0.5em 1.2em;border-radius:6px;font-weight:bold;cursor:pointer;">Search</button>
-            <% if (typeof search !== 'undefined' && search) { %>
-                <a href="/orders" style="background:#ff9800;color:#fff;border:none;padding:0.5em 1.2em;border-radius:6px;font-weight:bold;cursor:pointer;text-decoration:none;">Clear</a>
-            <% } %>
-        </form>
-        <% if (typeof search !== 'undefined' && search) { %>
-            <form method="get" action="/orders" style="margin-bottom:1rem;">
-                <button type="submit" style="background:#ff9800;color:#fff;border:none;padding:0.4em 1em;border-radius:6px;font-weight:bold;cursor:pointer;">Clear search</button>
+        <div style="margin-bottom:2rem; display: flex; gap: 0.5rem; align-items: center;">
+            <form method="get" action="/orders" style="display: flex; gap: 0.5rem; align-items: center; flex: 1;">
+                <input type="text" name="search" placeholder="Search product, type, store..." value="<%= typeof search !== 'undefined' ? search : '' %>" style="padding:0.5em 1em; border-radius:6px; border:1px solid #00bcd4; width:60%; max-width:400px;">
+                <button type="submit" style="background:#1976d2;color:#fff;border:none;padding:0.5em 1.2em;border-radius:6px;font-weight:bold;cursor:pointer;">Search</button>
+                <% if (typeof search !== 'undefined' && search) { %>
+                    <a href="/orders" style="background:#ff9800;color:#fff;border:none;padding:0.5em 1.2em;border-radius:6px;font-weight:bold;cursor:pointer;text-decoration:none;">Clear</a>
+                <% } %>
             </form>
-        <% } %>
+            <a class="switch-link" href="/orders/images" style="background:#1976d2;color:#fff;border-radius:6px;padding:0.4em 1em;text-decoration:none;font-weight:bold;box-shadow:0 1px 4px rgba(25,118,210,0.08);transition:background 0.2s;">Images View</a>
+        </div>
+        <!-- Duplicate search form and input removed -->
         <% if (orders && orders.length) { %>
             <% orders.forEach(order => { %>
                 <div class="order-card">

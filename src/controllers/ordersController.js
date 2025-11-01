@@ -64,10 +64,19 @@ exports.listOrders = (req, res) => {
     });
 };
 
+
 exports.orderDetail = (req, res) => {
     const orderId = req.params.id;
     getOrders((orders) => {
         const order = orders.find(o => o.orderId === orderId);
         res.render('orderDetail', { order });
+    });
+};
+
+exports.imagesView = (req, res) => {
+    getOrders((orders) => {
+        // Only include orders with images
+        const images = orders.filter(order => order.imageUrl);
+        res.render('images', { images });
     });
 };
