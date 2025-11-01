@@ -81,7 +81,7 @@ exports.imagesView = (req, res) => {
             const Fuse = require('fuse.js');
             const fuse = new Fuse(images, {
                 keys: ['name', 'Item attributes', 'Item product link', 'storeName'],
-                threshold: 0.4,
+                threshold: 0.2,
                 ignoreLocation: true,
                 minMatchCharLength: 2
             });
