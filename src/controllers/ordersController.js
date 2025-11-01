@@ -7,6 +7,7 @@ const ordersFile = path.join(__dirname, '../../generated.csv');
 
 function getOrders(callback) {
     const results = [];
+    let isFirstRow = true;
     fs.createReadStream(ordersFile)
         .pipe(csv({
             separator: ',',
@@ -15,12 +16,21 @@ function getOrders(callback) {
             ]
         }))
         .on('data', (data) => {
+            // Skip header rows by checking for header values in data
+            if (
+                data['Order Id'] === 'Order Id' ||
+                data['Item title'] === 'Item title' ||
+                data['Order date'] === 'Order date'
+            ) {
+                return;
+            }
             // Only parse rows with a valid item title and image
             if (data['Item title'] && data['Order Id'] && data['Item image url']) {
                 results.push({
                     orderId: data['Order Id'],
                     date: data['Order date'],
                     price: data['Item price'],
+                    currency: data['Currency'],
                     name: data['Item title'],
                     imageUrl: data['Item image url'],
                     detailUrl: data['Order detail url'],

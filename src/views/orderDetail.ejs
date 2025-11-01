@@ -16,7 +16,11 @@
                 <img src="<%= order.imageUrl %>" alt="Order image"><br>
             <% } %>
             <% Object.keys(order).forEach(key => { %>
-                <strong><%= key %>:</strong> <%= order[key] %><br>
+                <% if (key === 'Item price') { %>
+                    <strong>Item price:</strong> <%= order[key] %> <%= order['Currency'] %><br>
+                <% } else { %>
+                    <strong><%= key %>:</strong> <%= order[key] %><br>
+                <% } %>
             <% }) %>
         </div>
         <a href="/orders">Back to list</a>

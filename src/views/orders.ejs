@@ -21,7 +21,7 @@
                 <div class="order-info">
                     <strong>Name:</strong> <%= order.name %><br>
                     <strong>Date:</strong> <%= order.date %><br>
-                    <strong>Price:</strong> <%= order.price %><br>
+                    <strong>Price:</strong> <%= order.price %> <%= order.currency %><br>
                     <strong>Store:</strong> <%= order.storeName %><br>
                     <a href="/orders/<%= order.orderId %>">Details</a>
                     <% if (order.detailUrl) { %>
