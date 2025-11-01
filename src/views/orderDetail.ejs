@@ -1,32 +1,103 @@
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Order Detail</title>
     <style>
-        body { font-family: Arial, sans-serif; }
-        .order-detail { border: 1px solid #ccc; margin: 20px; padding: 20px; }
-        img { max-width: 200px; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f7f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #00bcd4;
+            color: #fff;
+            padding: 1rem 2rem;
+            text-align: center;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .container {
+            max-width: 700px;
+            margin: 2rem auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            padding: 2rem;
+        }
+        .order-detail img {
+            max-width: 200px;
+            border-radius: 8px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+            margin-bottom: 1rem;
+        }
+        .order-fields {
+            margin-bottom: 2rem;
+        }
+        .order-fields div {
+            margin-bottom: 0.5rem;
+        }
+        .order-fields .order-name {
+            font-size: 1rem;
+            font-weight: normal;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        .order-fields strong {
+            color: #00bcd4;
+        }
+        .back-link {
+            background: #1976d2;
+            color: #fff;
+            border-radius: 6px;
+            padding: 0.4em 1em;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 1px 4px rgba(25,118,210,0.08);
+            transition: background 0.2s;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+        .back-link:hover {
+            background: #1565c0;
+            text-decoration: underline;
+        }
+        .aliexpress-link {
+            color: #ff9800;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .aliexpress-link:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
-    <h1>Order Detail</h1>
-    <% if (order) { %>
-        <div class="order-detail">
-            <% if (order.imageUrl) { %>
-                <img src="<%= order.imageUrl %>" alt="Order image"><br>
-            <% } %>
-            <% Object.keys(order).forEach(key => { %>
-                <% if (key === 'Item price') { %>
-                    <strong>Item price:</strong> <%= order[key] %> <%= order['Currency'] %><br>
-                <% } else { %>
-                    <strong><%= key %>:</strong> <%= order[key] %><br>
+    <header>Order Detail</header>
+    <div class="container">
+        <% if (order) { %>
+            <div class="order-detail">
+                <% if (order.imageUrl) { %>
+                    <img src="<%= order.imageUrl %>" alt="Order image"><br>
                 <% } %>
-            <% }) %>
-        </div>
-        <a href="/orders">Back to list</a>
-    <% } else { %>
-        <p>Order not found.</p>
-        <a href="/orders">Back to list</a>
-    <% } %>
+                <div class="order-fields">
+                    <div class="order-name"><strong>Name:</strong> <%= order.name %></div>
+                    <div><strong>Date:</strong> <%= order.date %></div>
+                    <div><strong>Price:</strong> <%= order.price %> <%= order.currency %></div>
+                    <div><strong>Store:</strong> <%= order.storeName %></div>
+                    <div><strong>Order ID:</strong> <%= order.orderId %></div>
+                    <% if (order.detailUrl) { %>
+                        <div><strong>AliExpress Link:</strong> <a class="aliexpress-link" href="<%= order.detailUrl %>" target="_blank"><%= order.detailUrl %></a></div>
+                    <% } %>
+                </div>
+            </div>
+            <a class="back-link" href="/orders">&larr; Back to list</a>
+        <% } else { %>
+            <p>Order not found.</p>
+            <a class="back-link" href="/orders">&larr; Back to list</a>
+        <% } %>
+    </div>
 </body>
 </html>
