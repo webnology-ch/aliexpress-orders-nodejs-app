@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Detail</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .order-detail { border: 1px solid #ccc; margin: 20px; padding: 20px; }
+        img { max-width: 200px; }
+    </style>
+</head>
+<body>
+    <h1>Order Detail</h1>
+    <% if (order) { %>
+        <div class="order-detail">
+            <% if (order.imageUrl) { %>
+                <img src="<%= order.imageUrl %>" alt="Order image"><br>
+            <% } %>
+            <% Object.keys(order).forEach(key => { %>
+                <strong><%= key %>:</strong> <%= order[key] %><br>
+            <% }) %>
+        </div>
+        <a href="/orders">Back to list</a>
+    <% } else { %>
+        <p>Order not found.</p>
+        <a href="/orders">Back to list</a>
+    <% } %>
+</body>
+</html>
