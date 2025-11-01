@@ -87,6 +87,7 @@
                     <div><strong>Date:</strong> <%= order.date %></div>
                     <div><strong>Price:</strong> <%= order.price %> <%= order.currency %></div>
                     <div><strong>Store:</strong> <%= order.storeName %></div>
+                    <div><strong>Quantity:</strong> <%= order['Item quantity'] %></div>
                     <div><strong>Order ID:</strong> <%= order.orderId %></div>
                     <% if (order.detailUrl) { %>
                         <div><strong>AliExpress Link:</strong> <a class="aliexpress-link" href="<%= order.detailUrl %>" target="_blank"><%= order.detailUrl %></a></div>
