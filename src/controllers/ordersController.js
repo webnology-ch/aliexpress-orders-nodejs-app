@@ -43,9 +43,24 @@ function getOrders(callback) {
         .on('end', () => callback(results));
 }
 
+const Fuse = require('fuse.js');
+
 exports.listOrders = (req, res) => {
+    const search = req.query.search ? req.query.search.trim() : '';
     getOrders((orders) => {
-        res.render('orders', { orders });
+        let filtered = orders;
+        if (search) {
+            const fuse = new Fuse(orders, {
+                keys: ['name', 'Item attributes', 'Item product link', 'storeName'],
+                threshold: 0.2,
+                ignoreLocation: true,
+                minMatchCharLength: 2
+            });
+            filtered = fuse.search(search).map(result => result.item);
+        } else {
+            filtered = orders;
+        }
+        res.render('orders', { orders: filtered, search });
     });
 };
 
