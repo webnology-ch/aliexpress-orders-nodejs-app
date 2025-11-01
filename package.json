@@ -4,7 +4,8 @@
   "description": "1. **Initialize a new Node.js project**:    ```bash    mkdir orders-app    cd orders-app    npm init -y    ```",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
   },
   "keywords": [],
   "author": "",
@@ -15,5 +16,8 @@
     "ejs": "^3.1.10",
     "express": "^5.1.0",
     "fuse.js": "^7.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }

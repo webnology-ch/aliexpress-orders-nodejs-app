@@ -18,12 +18,17 @@ This app displays your AliExpress orders (with images and details) from a CSV ex
       npm install
       ```
 
+
 4. **Start the app:**
-    - Run:
-      ```bash
-      node src/app.js
-      ```
-    - Open [http://localhost:3000/orders](http://localhost:3000/orders) in your browser.
+     - Run:
+         ```bash
+         node src/app.js
+         ```
+     - Or, for automatic restarts on code changes (requires nodemon):
+         ```bash
+         npm run dev
+         ```
+     - Open [http://localhost:3000/orders](http://localhost:3000/orders) in your browser.
 
 ## Notes
 - The app parses your CSV and displays each order with its image, name, date, price, and links to details.
